@@ -1,7 +1,7 @@
 import jobs from '../data/jobs.json' with { type: 'json' }    
 
 export class JobModel {
-    static async getAll({ text, title, level, limit, technology, offset }) {
+    static async getAll({ text, title, level, limit , technology, offset }) {
         let filteredJobs = jobs;
 
         if (text) {
@@ -22,7 +22,7 @@ export class JobModel {
         if (technology) {
             const techTerm = technology.toLowerCase();
             filteredJobs = filteredJobs.filter(job => 
-                job.tecnologias.some(tech => tech.toLowerCase().includes(techTerm))
+                job.data.technology.some(tech => tech.toLowerCase().includes(techTerm))
             );
         }
 

@@ -3,11 +3,10 @@ import { JobModel } from "../models/job.js";
 
 export class JobsController {
     static async getAll(req, res) {
-        const { text, title, level, limit = DEFAULTS.LIMIT, technology, offset = DEFAULTS.OFFSET } = req.query;
+        const { text, title, level, limit = DEFAULTS.LIMIT_PAGINATION, technology, offset = DEFAULTS.LIMIT_OFFSET } = req.query;
 
         const paginatedJobs = await JobModel.getAll({ text, title, level, limit, technology, offset });
-
-        return res.json({ data: paginatedJobs, total: filteredJobs.length, limit: limitNumber, offset: offsetNumber });
+        return res.json({ data: paginatedJobs, total: paginatedJobs.length, limit: limit, offset: offset });
     }
 
     static async getById(req, res) {
